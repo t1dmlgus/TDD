@@ -33,83 +33,62 @@ import static org.assertj.core.api.Assertions.*;
 
 class StringCalculatorTest {
 
+    private StringCalculator stringCalculator;
 
-    private StringCalculator cal;
 
     @BeforeEach
-    public void setUp(){
-        cal = new StringCalculator();
+    void setUp() {
+
+        stringCalculator = new StringCalculator();
     }
+
 
     @Test
-    public void null_또는_빈값() throws Exception{
+    public void null_또는_빈칸() throws Exception{
         //given
-
         //when
-
         //then
-        assertThat(cal.splitAndSum("")).isEqualTo(0);
-        assertThat(cal.splitAndSum("0")).isEqualTo(0);
-
+        assertThat(stringCalculator.add("")).isEqualTo(0);
+        assertThat(stringCalculator.add(null)).isEqualTo(0);
 
     }
-
 
     @Test
     public void 값_하나() throws Exception{
         //given
-
         //when
-
         //then
-        assertThat(cal.splitAndSum("3")).isEqualTo(3);
-    }
-
-    @Test
-    public void 쉼표_구분자() throws Exception{
-        //given
-
-        //when
-
-
-        //then
-        assertThat(cal.splitAndSum("1,2")).isEqualTo(3);
+        assertThat(stringCalculator.add("1")).isEqualTo(1);
 
     }
 
     @Test
-    public void 쉼표_콜론_구분자() throws Exception{
+    public void 쉼표() throws Exception{
         //given
-
         //when
-
         //then
-        assertThat(cal.splitAndSum("1,2:3")).isEqualTo(6);
+
+        Assertions.assertThat(stringCalculator.add("1,2")).isEqualTo(3);
     }
 
+    
+    @Test
+    public void 쉼표_또는_클론() throws Exception{
+        //given
+        //when
+        //then
+        Assertions.assertThat(stringCalculator.add("1,2:4")).isEqualTo(7);
+    }
+    
+    
     @Test
     public void 커스텀구분자() throws Exception{
         //given
         
         //when
-
         //then
-        assertThat(cal.splitAndSum("//;\n1;2;4")).isEqualTo(7);
+        Assertions.assertThat(stringCalculator.add("//;\n1;2;5")).isEqualTo(8);
     }
     
-    
-    
-//    @Test
-//    public void 음수값() throws RuntimeException{
-//        //given
-//        StringCalculator.splitAndSum("-1, 2: 3");
-//
-//
-//        //when
-//
-//
-//        //then
-//    }
-//
 
 }
